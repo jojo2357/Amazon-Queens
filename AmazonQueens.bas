@@ -9,6 +9,8 @@ TYPE boardTile
   needToBeYellow AS _BYTE
 END TYPE
 
+_TITLE "Amazon queens: White's turn"
+
 boardWidth = 6
 boardHeight = 6
 
@@ -61,6 +63,17 @@ DO
     _LIMIT 100
     mouse_X = _MOUSEX
     mouse_Y = _MOUSEY
+    IF _MOUSEBUTTON(2) THEN
+      IF turnPart = 2 THEN
+        FOR xClearer = 1 TO boardWidth
+          FOR yClearer = 1 TO boardHeight
+            boardData(xClearer, yClearer).needToBeYellow = 0
+          NEXT
+        NEXT
+        turnPart = 1
+        GOSUB drawBoard
+      END IF
+    END IF
     IF _MOUSEBUTTON(1) THEN
       clickedX = INT(mouse_X / 32)
       clickedY = INT(mouse_Y / 32)
@@ -127,7 +140,7 @@ DO
                 NEXT
 
                 FOR xCheckerForGoable = 1 TO boardWidth
-                  IF H_R AND clickedX + xCheckerForGoable < boardWidth THEN
+                  IF H_R AND clickedX + xCheckerForGoable <= boardWidth THEN
                     IF boardData(clickedX + xCheckerForGoable, clickedY).thingHere = 0 THEN
                       boardData(clickedX + xCheckerForGoable, clickedY).needToBeYellow = 1
                     ELSE H_R = 0
@@ -175,7 +188,15 @@ DO
         CASE 2
           IF clickedX >= 1 AND clickedX <= boardWidth THEN
             IF clickedY >= 1 AND clickedY <= boardHeight THEN
-              IF boardData(clickedX, clickedY).needToBeYellow = 1 THEN
+              IF selectedX = clickedX AND clickedY = selectedY THEN
+                FOR xClearer = 1 TO boardWidth
+                  FOR yClearer = 1 TO boardHeight
+                    boardData(xClearer, yClearer).needToBeYellow = 0
+                  NEXT
+                NEXT
+                turnPart = 1
+                GOSUB drawBoard
+              ELSEIF boardData(clickedX, clickedY).needToBeYellow = 1 THEN
                 SWAP boardData(clickedX, clickedY).thingHere, boardData(selectedX, selectedY).thingHere
                 FOR xClearer = 1 TO boardWidth
                   FOR yClearer = 1 TO boardHeight
@@ -238,7 +259,7 @@ DO
                 NEXT
 
                 FOR xCheckerForGoable = 1 TO boardWidth
-                  IF H_R AND clickedX + xCheckerForGoable < boardWidth THEN
+                  IF H_R AND clickedX + xCheckerForGoable <= boardWidth THEN
                     IF boardData(clickedX + xCheckerForGoable, clickedY).thingHere = 0 THEN
                       boardData(clickedX + xCheckerForGoable, clickedY).needToBeYellow = 1
                     ELSE H_R = 0
@@ -251,6 +272,7 @@ DO
                     END IF
                   END IF
                 NEXT
+
                 FOR diagCheckerForGoable = 1 TO boardWidth
                   IF D_R AND clickedX + diagCheckerForGoable <= boardWidth AND clickedY + diagCheckerForGoable <= boardHeight THEN
                     IF boardData(clickedX + diagCheckerForGoable, clickedY + diagCheckerForGoable).thingHere = 0 THEN
@@ -352,7 +374,7 @@ DO
 
 
 
-                      IF H_R AND deathCheckX + 1 < boardWidth THEN
+                      IF H_R AND deathCheckX + 1 <= boardWidth THEN
                         IF boardData(deathCheckX + 1, deathChecky).thingHere < 3 THEN
                           living = 1
                         ELSE H_R = 0
@@ -450,7 +472,7 @@ DO
 
 
 
-                        IF H_R AND deathCheckX + 1 < boardWidth THEN
+                        IF H_R AND deathCheckX + 1 <= boardWidth THEN
                           IF boardData(deathCheckX + 1, deathChecky).thingHere < 1 THEN
                             living = 1
                           ELSE H_R = 0
@@ -500,8 +522,10 @@ DO
                 GOSUB drawBoard
                 IF turn = 2 THEN
                   turn = 1
+                  _TITLE "Amazon queens: White's turn"
                 ELSE
                   turn = 2
+                  _TITLE "Amazon queens: Black's turn"
                 END IF
                 notGG = 0
                 FOR ggCheckX = 1 TO boardWidth
