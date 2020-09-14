@@ -66,9 +66,9 @@ DO
       clickedY = INT(mouse_Y / 32)
       SELECT CASE turnPart
         CASE 1
-          IF turn = boardData(clickedX, clickedY).thingHere AND boardData(clickedX, clickedY).canMove = 0 THEN
-            IF clickedX >= 1 AND clickedX <= boardWidth THEN
-              IF clickedY >= 1 AND clickedY <= boardHeight THEN
+          IF clickedX >= 1 AND clickedX <= boardWidth THEN
+            IF clickedY >= 1 AND clickedY <= boardHeight THEN
+              IF turn = boardData(clickedX, clickedY).thingHere AND boardData(clickedX, clickedY).canMove = 0 THEN
                 selectedX = clickedX
                 selectedY = clickedY
                 IF clickedX > 1 AND clickedY > 1 THEN
