@@ -33,18 +33,14 @@ tilePieces&(5) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\DeadBlackQueen.png")
 DIM boardData(1 TO boardWidth, 1 TO boardHeight) AS boardTile
 
 FOR x = 1 TO boardHeight
-  READ rawBoardData(1, x)
-  boardData(1, x).tileColor = rawBoardData(1, x)
-  FOR y = 2 TO boardWidth
+  FOR y = 1 TO boardWidth
     READ rawBoardData(y, x)
     boardData(y, x).tileColor = rawBoardData(y, x)
   NEXT
 NEXT
 
 FOR x = 1 TO boardHeight
-  READ rawBoardData(1, x)
-  boardData(1, x).thingHere = rawBoardData(1, x)
-  FOR y = 2 TO boardWidth
+  FOR y = 1 TO boardWidth
     READ rawBoardData(y, x)
     boardData(y, x).thingHere = rawBoardData(y, x)
   NEXT
@@ -555,16 +551,17 @@ RETURN
 GG:
 PRINT "Game Over!"
 PRINT "Player "; turn; " cannot move and thereore loses!"
+
 END
 
-DATA 1,2,1,2,1,2 'Board tiles
+DATA 1,2,1,2,1,2
 DATA 2,1,2,1,2,1
 DATA 1,2,1,2,1,2
 DATA 2,1,2,1,2,1
 DATA 1,2,1,2,1,2
 DATA 2,1,2,1,2,1
 
-DATA 0,0,0,1,0,0  'Queens
+DATA 0,0,0,1,0,0
 DATA 0,0,0,0,0,0
 DATA 2,0,0,0,0,0
 DATA 0,0,0,0,0,2
