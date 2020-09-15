@@ -1,0 +1,1 @@
+Make a csv array that mirrors the board where 0 is an empty tile, 1 is a white queen, and 2 is a black quees

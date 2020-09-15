@@ -1,0 +1,1 @@
+Make a csv array where each entry is the color that you want the board tile to be, with the desired width and height as well. COMING SOON: blank spots that are terrain/impassable
