@@ -33,14 +33,15 @@ _ICON icon&
 mainMenu& = _LOADIMAGE(_CWD$ + "\Dependencies\Images\game_of_amazons_title.png", 32)
 mmPic& = _LOADIMAGE(_CWD$ + "\Dependencies\Images\game_of_amazons_title.png")
 
-DIM tiles&(1 TO 4)
+DIM tiles&(1 TO 5)
 
 tiles&(1) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\WhiteBoardTile.png")
 tiles&(2) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\BlackBoardTile.png")
 tiles&(3) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\PossibleBoardTile.png")
 tiles&(4) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\ShootBoardTile.png")
+tiles&(5) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\ForrestTile.png")
 
-DIM tilePieces&(1 TO 5)
+DIM tilePieces&(1 TO 6)
 tilePieces&(1) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\WhiteQueen.png")
 tilePieces&(2) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\BlackQueen.png")
 tilePieces&(3) = _LOADIMAGE(_CWD$ + "\Dependencies\Images\FireBoardTile.png")
@@ -95,6 +96,9 @@ DO
   FOR x = 1 TO boardHeight
     FOR y = 1 TO boardWidth
       boardData(y, x).thingHere = rawBoardData(y, x)
+      IF boardData(y, x).tileColor > 2 THEN
+        boardData(y, x).thingHere = 6
+      END IF
     NEXT
   NEXT
 
@@ -185,7 +189,7 @@ DO
         END IF
         IF mouse_X < 250 AND mouse_X > 170 THEN
           IF mouse_Y > 330 AND mouse_Y < 360 THEN
-                 LINE (0, 0)-(600, 600), _RGB(0, 0, 0), BF
+            LINE (0, 0)-(600, 600), _RGB(0, 0, 0), BF
             PRINT "Amazon Queens/Game of the Amazons is a board game"
             PRINT "where players take turns making moves"
             PRINT
@@ -764,7 +768,9 @@ NEXT
 FOR x = 1 TO boardHeight
   FOR y = 1 TO boardWidth
     IF boardData(y, x).thingHere <> 0 THEN
-      _PUTIMAGE (32 * y, 32 * x), tilePieces&(boardData(y, x).thingHere)
+      IF boardData(y, x).thingHere < 6 THEN
+        _PUTIMAGE (32 * y, 32 * x), tilePieces&(boardData(y, x).thingHere)
+      END IF
     END IF
   NEXT
 NEXT
