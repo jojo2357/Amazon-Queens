@@ -114,7 +114,22 @@ DO
         END IF
         IF mouse_X < 280 AND mouse_X > 140 THEN
           IF mouse_Y > 240 AND mouse_Y < 280 THEN
-            REM customize
+            LINE (0, 0)-(600, 600), _RGB(0, 0, 0), BF
+            PRINT "You can customize the starting game board by editing"
+            PRINT _CWD$ + "\Dependencies\BoardData\BoardTiling.txt and"
+            PRINT _CWD$ + "\Dependencies\BoardData\PieceLayout.txt"
+            PRINT
+            PRINT "For more info, go to"
+            PRINT _CWD$ + "\Dependencies\BoardData\"
+            PRINT "and read the two help files"
+            PRINT
+            PRINT "Press any key to return to main menu"
+            SLEEP
+            CLS
+            _PUTIMAGE (0, 0), mmPic&
+            DO UNTIL NOT _MOUSEINPUT
+              i = _MOUSEINPUT
+            LOOP
           END IF
         END IF
         IF mouse_X < 260 AND mouse_X > 165 THEN
@@ -128,7 +143,7 @@ DO
             PRINT
             PRINT "Game board by jojo"
             PRINT
-            PRINT "Home screen and idea thanks to mew_the_pinkmin"
+            PRINT "Home screen and idea thanks to Mew_The_Pinkmin"
             PRINT
             PRINT "Im sure that xf8b did some lovely work tidying up the"
             PRINT "github, thanks as always for making sure my repos look"
@@ -161,12 +176,36 @@ DO
                 END IF
               END IF
             LOOP UNTIL INKEY$ <> ""
+            DO UNTIL NOT _MOUSEINPUT
+              i = _MOUSEINPUT
+            LOOP
+            CLS
             _PUTIMAGE (0, 0), mmPic&
           END IF
         END IF
         IF mouse_X < 250 AND mouse_X > 170 THEN
           IF mouse_Y > 330 AND mouse_Y < 360 THEN
-            REM rulez
+                 LINE (0, 0)-(600, 600), _RGB(0, 0, 0), BF
+            PRINT "Amazon Queens/Game of the Amazons is a board game"
+            PRINT "where players take turns making moves"
+            PRINT
+            PRINT "on their turn, a player can move their queen in any of"
+            PRINT "the 8 compass directions and as far as the end of the"
+            PRINT "board, an enemy queen, or a fire tile."
+            PRINT
+            PRINT "After moving, the queen shoots a fire arrow that moves"
+            PRINT "the exact same way that the queen does; 8 directions,"
+            PRINT "as far as the first obstacle, or as near as desired"
+            PRINT
+            PRINT "The first player that cannot make a move loses!"
+            PRINT
+            PRINT "Press any key to return to main menu"
+            SLEEP
+            DO UNTIL NOT _MOUSEINPUT
+              i = _MOUSEINPUT
+            LOOP
+            CLS
+            _PUTIMAGE (0, 0), mmPic&
           END IF
         END IF
         IF mouse_X < 240 AND mouse_X > 180 THEN
