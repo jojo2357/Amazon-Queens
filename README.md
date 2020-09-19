@@ -1,3 +1,6 @@
+# Itch.io
+If you only want the bare minimum, there is a zip:
+https://jojo2357.itch.io/amazon-queens
 # Amazon-Queens
 https://en.wikipedia.org/wiki/Game_of_the_Amazons
 ## Gameplay Pictures
